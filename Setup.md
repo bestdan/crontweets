@@ -1,31 +1,25 @@
 
-# Bottom Line
-Using `crontwit` to run a scheduled Twitter library. 
+# Overview
 
 In this guide, I'll go through: 
 - Background: why you might want to use this. 
 - Getting and storing your twitter credentials
-- Making, using and storing your `schedule` and `tweet_db` 
-- cron setup (on AWS EC2)
-
-
-I'm going to use:
-- **AWS EC2**: for a constantly-on computer running the schedule. You can just do it on your own computer if you want. 
-- **iTerm3**: for ssh'ing into your EC2 instance from the command line. Again, you can use whatever you want. 
-- **git/github**: for maintaining your code and library.
-- **R**: for setting up, accessing and runnint the `crontwit` library and interfacing with Twitter. 
-
+- Making, using and storing your `schedule` and `tweet_db` files
+- Setting up crontabs and shell scripts
+- Updating your library
+- An AWS EC2 specific guide
+- Troubleshooting
 
 # Background
-I generally try to write ever-green/non-ephemeral articles. I've also noticed that other writers who try to do this will periodically share older content, which is great. I wanted to be able to do the same. 
+I generally try to write ever-green/non-ephemeral [articles](http://www.dpegan.com/optimal_behavior/). I then periodically share random pieces of content on twitter, which helps people keep discovering relevant ideas.
  
-So, I used to pay something like $500 a year for [MeetEdgar](www.meetedgar.com). It maintained a categorical library of social media content, and posts random things at pre-apppointed times from different categories. 
+I used to pay ~$500 a year for [MeetEdgar](www.meetedgar.com). It maintained a categorical library of social media content, and posts random things at pre-apppointed times from different categories. 
 
-Rather than pay for it, I decided to built it myself. 
+This is just a DIY version of that service. It still costs ~$5 a month for AWS given how I've done it though. 
 
 
 
-# Getting and storing your twitter API credentials
+# Step 1: Getting and storing your twitter API credentials: 
 In order to post tweets via the Twitter API, you need to 
 1) Setup your Twitter to allow an API connections, and get your API credentials. You can read how to do that here. 
 3) Store and 
@@ -54,7 +48,7 @@ github:
 
 However you decide to deploy your crontwit schedule, you'll need to have the local path to these credentials. For example, I store mine in `~/src/twitter_credentials.yaml` on my local computer, and `~/creds/twitter_credentials.yaml` on my EC2 instance. 
 
-# Making, using and storing your `schedule` and `tweet_db` 
+# Step 2: Making, using and storing your `schedule` and `tweet_db` 
 What `crontwit` does is very simple:  
 * Create a `tweet_db` database of tweets. 
 * Create a schedule you want to post on. 
@@ -73,11 +67,21 @@ save(tweet_db, file =file.path("~","Desktop", "tweet_db.rda"))
 We'll then use that `tweet_db.rda` file on EC2 as the source of our tweets.
 
 
-## Making a `schedule` 
+## Making a crontab-like `schedule` in R
+The `schedule` object holds a cron-like set of data for knowing when to post what. Here's an example:
+
+```r
+>   minute hour dow category id
+> 1      0    8   1  animals NA
+> 2      5   12   3  animals NA
+> 3      5   12   3     food NA
+> 4      0    7  NA   wakeup NA
+```
+
+Much like a contab there is an entry for minut, hour, and day-of-week (dow). There are additional fields category and id. 
 
 
-
-# Setting up crontabs and shell scripts
+# Step 3: Setting up crontabs and shell scripts
 
 ## Setting up crontab
 The way I went about running the schedule was using crontab, which is a local utility that comes with linux and mac computers. Effectively, you tell the computer to run a file on a schedule. To open crontab, in a terminal go:
@@ -134,12 +138,15 @@ checkScheduleAndPost(schedule, tweet_db)
 
 ```
 
-# Updating your library
+# Step 4: Updating your library
 How do you get new content into your tweet_db, or change your schedule? I'd suggest a nightly run via crontab pulling through a web-based service like github, dropbox, or S3. 
 
 ## crontab + github
 This solution uses crontab to run a daily sync via g
 
+# Tangent: An AWS EC2 guide
+
+[Here](ec2_setup.md)
 
 # Step 5: Troubleshooting
 
