@@ -2,29 +2,23 @@
 # Overview
 
 In this guide, I'll go through: 
-- Background: why you might want to use this. 
 - Getting and storing your twitter credentials
 - Making, using and storing your `schedule` and `tweet_db` files
 - Setting up crontabs and shell scripts
 - Updating your library
 - An AWS EC2 specific guide
 - Troubleshooting
-
-# Background
-I generally try to write ever-green/non-ephemeral [articles](http://www.dpegan.com/optimal_behavior/). I then periodically share random pieces of content on twitter, which helps people keep discovering relevant ideas.
- 
-I used to pay ~$500 a year for [MeetEdgar](www.meetedgar.com). It maintained a categorical library of social media content, and posts random things at pre-apppointed times from different categories. 
-
-This is just a DIY version of that service. It still costs ~$5 a month for AWS given how I've done it though. 
+- Background: why you might want to use this. 
 
 
 
 # Step 1: Getting and storing your twitter API credentials: 
-In order to post tweets via the Twitter API, you need to 
-1) Setup your Twitter to allow an API connections, and get your API credentials. You can read how to do that here. 
-3) Store and 
+## Getting your API keys
+In order to post tweets via the Twitter API, you'll need to setup your Twitter account to allow an API connections, and get your API credentials. You can read how to do that [here](https://medium.com/@GalarnykMichael/accessing-data-from-twitter-api-using-r-part1-b387a1c7d3e). 
 
-**Critical Security note**: You should never store or transmit your credentials in public using plain-text that someone else can see. For example, don't store them in a public github repo :no_good: . 
+## Storing your credentials
+
+:closed_lock_with_key: **Critical Security note** :closed_lock_with_key: : You should never store or transmit your credentials in public using plain-text that someone else can see. For example, don't store them in a public github repo :no_good: . 
 
 I recommend saving your credentials into a `twitter_credentials.yaml` file as below. If you're not familiar with yaml, just know that the indentation is key. The example below holds credentials for two twitter accounts and one github account. I'll use examples that load these credentials to authenticate.  
 
@@ -114,7 +108,8 @@ I'm going to use bash [shell scripts](https://fileinfo.com/extension/sh) in my c
 ```r
 #' Ensure you have dependencies. 
 if(!require(pacman)) install.packages("pacman", repos='http://cran.us.r-project.org')
-pacman::p_load(twitteR, yaml, crontwit)
+pacman::p_load(twitteR, yaml)
+library(crontwit)
 
 # Load paths
 creds_path <- "~/src/degan_creds.yaml"
@@ -161,3 +156,11 @@ This solution uses crontab to run a daily sync via g
 ### Time zones
 One nasty potential problem (I've never experienced it) is if the machine (EC2 etc) you deploy your `schedule` on is in a different time zone. 
 I should probably make some kind of time-zone argument to the `schedule`. Pull requests are welcome! 
+
+
+# Background
+I generally try to write ever-green/non-ephemeral [articles](http://www.dpegan.com/optimal_behavior/). I then periodically share random pieces of content on twitter, which helps people keep discovering relevant ideas. I appreciate it when other people do this, so I thought I would do it myself.
+ 
+I used to pay ~$500 a year for [MeetEdgar](www.meetedgar.com). It maintained a categorical library of social media content, and posts random things at pre-apppointed times from different categories. 
+
+This is just a DIY version of that service. It still costs ~$5 a month for AWS given how I've done it though. 
