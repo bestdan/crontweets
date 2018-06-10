@@ -1,13 +1,18 @@
 Package: crontweets
 Version: 0.0.0.9000
-Title: What the Package Does (One Line, Title Case)
-Description: What the package does (one paragraph).
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-License: What license is it under?
+Title: Schedule and post twitter content
+Description: Build, manage, and schedule posts of tweets to be deployed through a bot.
+Authors@R: person("Daniel", "Egan", email = "dp.egan@gmail.com", role = c("aut", "cre"))
+License: LICENSE
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 Suggests: 
     knitr,
     rmarkdown
+Imports:
+    digest,
+    twitteR, 
+    utils
 VignetteBuilder: knitr
+RoxygenNote: 6.0.1

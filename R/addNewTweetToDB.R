@@ -1,11 +1,14 @@
 #' @name addNewTweetToDB 
+#' @title addNewTweetToDB 
 #' @description Add a new tweet to the \code{\link{tweet_db}}. If inputs are not specified, it will ask in the console for input. Automatically creats unique identifier.
 #' @param tweet_text The text of the tweet.
 #' @param category A category to assign the tweet to. 
 #' @param media_path A file-path to a picture or something you want to share. 
 #' @param tweet_db Allows you to pass an in-memory database in to continue building it out. 
-#' @export
+#' @param ask Boolean for whether you want to turn off asking about adding new categories.
 #' @importFrom digest sha1
+#' @importFrom utils askYesNo
+#' @export
 #' @examples 
 #' addNewTweetToDB("TestTweet", category="test")
 
