@@ -11,7 +11,9 @@ Depends:
     R (>= 2.10)
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat,
+    covr
 Imports:
     digest,
     twitteR, 

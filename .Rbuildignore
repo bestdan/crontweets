@@ -4,3 +4,5 @@
 ^README.Rmd
 ^README.md
 ^Setup.md
+^\.travis\.yml$
+^codecov\.yml$
