@@ -1,6 +1,6 @@
 ## crontwit: build, manage, and schedule twitter posts.
-[![Travis build status](https://travis-ci.org/bestdan/crontweets.svg?branch=master)](https://travis-ci.org/bestdan/crontweets)
-[![Coverage status](https://codecov.io/gh/bestdan/crontweets/branch/master/graph/badge.svg)](https://codecov.io/github/bestdan/crontweets?branch=master)
+[![Travis build status](https://travis-ci.org/bestdan/crontwit.svg?branch=master)](https://travis-ci.org/bestdan/crontweets)
+[![Coverage status](https://codecov.io/gh/bestdan/crontwit/branch/master/graph/badge.svg)](https://codecov.io/github/bestdan/crontwit?branch=master)
 
 
 
