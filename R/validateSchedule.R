@@ -14,20 +14,20 @@
 
 validateSchedule <- function(schedule){
   
-  dow_failures <- which(!schedule$dow %in% seq(0,6))
+  dow_failures <- which(!schedule$dow %in% seq(0,6) & !is.na(schedule$dow))
   
   if(length(dow_failures) > 0){
     stop(paste0("All dow entries must be one of integers 0 to 6. These rows fail: ", 
                 paste(dow_failures, collapse = ",")))
   }
   
-  hour_failures <- which(!schedule$hour %in% seq(0, 23))
+  hour_failures <- which(!schedule$hour %in% seq(0, 23) & !is.na(schedule$dow))
   if(length(hour_failures) > 0){
     stop(paste0("All hour entries must be one of integers 0 to 23, These rows fail: ", 
                 paste(hour_failures, collapse = ",")))
   }
   
-  minute_failures <- which(!schedule$minute %in% seq(0, 59))
+  minute_failures <- which(!schedule$minute %in% seq(0, 59) & !is.na(schedule$dow))
   if(length(minute_failures)  > 0){
     stop(paste0("All minute entries must be one of integers 0 to 23. These rows fail: ", 
                 paste(minute_failures, collapse = ",")))

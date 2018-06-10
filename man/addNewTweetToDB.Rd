@@ -4,8 +4,7 @@
 \alias{addNewTweetToDB}
 \title{addNewTweetToDB}
 \usage{
-addNewTweetToDB(tweet_text = NULL, category = NULL, media_path = NA,
-  tweet_db = NULL, ask = TRUE)
+addNewTweetToDB(tweet_text, category, media_path = NA, tweet_db = NULL)
 }
 \arguments{
 \item{tweet_text}{The text of the tweet.}
@@ -15,8 +14,6 @@ addNewTweetToDB(tweet_text = NULL, category = NULL, media_path = NA,
 \item{media_path}{A file-path to a picture or something you want to share.}
 
 \item{tweet_db}{Allows you to pass an in-memory database in to continue building it out.}
-
-\item{ask}{Boolean for whether you want to turn off asking about adding new categories.}
 }
 \description{
 Add a new tweet to the \code{\link{tweet_db}}. If inputs are not specified, it will ask in the console for input. Automatically creats unique identifier.

@@ -4,7 +4,7 @@
 \alias{nowFormatted}
 \title{nowFormatted}
 \usage{
-nowFormatted()
+nowFormatted(now_st = NULL)
 }
 \description{
 Returns the current datetime in a list.

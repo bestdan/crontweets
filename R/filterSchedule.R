@@ -13,8 +13,9 @@
 
 filterSchedule <- function(schedule_item, now, minute_range=3){
   schedule_item <- as.list(schedule_item)
-  results <- all(now$dow == schedule_item$dow, 
-                 now$hour == schedule_item$hour,
+  
+  results <- all(now$dow  == as.numeric(schedule_item$dow), 
+                 now$hour == as.numeric(schedule_item$hour),
                  abs(as.numeric(now$minute) - as.numeric(schedule_item$minute)) < minute_range)
   
   return(results) # Boolean

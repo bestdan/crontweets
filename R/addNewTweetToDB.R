@@ -5,7 +5,6 @@
 #' @param category A category to assign the tweet to. 
 #' @param media_path A file-path to a picture or something you want to share. 
 #' @param tweet_db Allows you to pass an in-memory database in to continue building it out. 
-#' @param ask Boolean for whether you want to turn off asking about adding new categories.
 #' @importFrom digest sha1
 #' @importFrom utils askYesNo
 #' @export
@@ -13,19 +12,7 @@
 #' addNewTweetToDB("TestTweet", category="test")
 
 
-addNewTweetToDB <- function(tweet_text=NULL, category=NULL, media_path = NA, tweet_db=NULL, ask=TRUE){
-  
-  if(any(is.null(tweet_text), is.null(category))){
-    tweet_text <- readline(prompt = "What is the tweet text?")
-    category <- readline(prompt = "Which category?")
-  }
-  
-  if(!is.null(tweet_db)){
-    if(!category %in% unique(tweet_db$category) & ask==TRUE){
-      category_response <- askYesNo(msg = "This category doesn't exist yet. Are you sure you want to create a new one?")
-      if(!category_response){return()}
-    }   
-  }
+addNewTweetToDB <- function(tweet_text, category, media_path = NA, tweet_db=NULL){
   
   this_tweet <- data.frame(tweet_text = tweet_text, 
                            category = category, 

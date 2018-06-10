@@ -4,7 +4,7 @@
 \alias{checkSchedule}
 \title{checkSchedule}
 \usage{
-checkSchedule(schedule, minute_range)
+checkSchedule(schedule, minute_range, now = NULL)
 }
 \arguments{
 \item{schedule}{A \code{\link{schedule}} object.}

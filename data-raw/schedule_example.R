@@ -13,10 +13,17 @@ schedule <- rbind(schedule,
                              id       = NA))
 
 schedule <- rbind(schedule,
-                  data.frame(minute   = 10,
-                             hour     = 16,
-                             dow      = 5,
+                  data.frame(minute   = 05,
+                             hour     = 12,
+                             dow      = 03,
                              category = "food", 
+                             id       = NA))
+
+schedule <- rbind(schedule,
+                  data.frame(minute   = 00,
+                             hour     = 07,
+                             dow      = NA,
+                             category = "wakeup", 
                              id       = NA))
 
 validateSchedule(schedule)

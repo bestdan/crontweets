@@ -9,16 +9,16 @@
 #' data(schedule)
 #' checkSchedule(schedule = schedule, minute_range=5)
 
-checkSchedule <- function(schedule, minute_range){
+checkSchedule <- function(schedule, minute_range, now = NULL){
   
   validateSchedule(schedule)
   
-  now <- nowFormatted()
+  now <- nowFormatted(now)
   
   parsed_schedule <- schedule
-  parsed_schedule$minute <- replaceWildcard(schedule$minute)
-  parsed_schedule$hour <- replaceWildcard(schedule$hour)
-  parsed_schedule$dow <- replaceWildcard(schedule$dow)
+  parsed_schedule$minute <- replaceWildcard(schedule$minute, type = "minute")
+  parsed_schedule$hour <- replaceWildcard(schedule$hour, type = "hour")
+  parsed_schedule$dow <- replaceWildcard(schedule$dow, type = "dow")
   
   matched_schedules <- parsed_schedule[apply(parsed_schedule, 1,
                                              filterSchedule,
@@ -49,8 +49,11 @@ replaceWildcard <- Vectorize(function(x, type){
 #' @examples 
 #' crontweets:::nowFormatted()
 
-nowFormatted <- function(){
-  now_st <- Sys.time()
+nowFormatted <- function(now_st=NULL){
+  if(is.null(now_st)){
+    now_st <- Sys.time() 
+  } 
+
   now_formatted <- list(minute = as.numeric(format(now_st, "%M")), 
                         hour   = as.numeric(format(now_st, "%H")), 
                         dow    = as.numeric(as.POSIXlt(now_st)$wday))  
