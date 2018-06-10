@@ -1,12 +1,5 @@
 
 ## Overview
-What `crontwit` does is very simple:  
-* Creates and validates a `tweet_db` database of tweets. 
-* Creates and validates a `schedule` you want to post on. 
-* Checks if the current time matches a schedule item, and posts any matching tweets.
-
-
-In this guide, I'll go through: 
 - Getting and storing your twitter credentials
 - Making, using and storing your `schedule` and `tweet_db` files
 - Setting up crontabs and shell scripts
@@ -94,10 +87,10 @@ It should open up an empty file. You can add entries to follow any schedule you 
 I'm going to wrap my `R` code in bash [shell scripts](https://fileinfo.com/extension/sh) in my crontab. It makes it slightly easier to troubleshoot later if necessary. For example, `run_crontwit.sh` is:
  
  ```bash
- #!/bin/bash                                                             # Hi! I'm a bash file. 
+ #!/bin/bash                                                  # Hi! I'm a bash file. 
 {
     sudo Rscript src/myscellany/degan_tweets/run_contwit.R    # As a super-user, please use R to run this file.
-} >> src/myscellany/degan_tweets/log/bash_log.txt                        # Send any output to this text file (for troubleshooting.)
+} >> src/myscellany/degan_tweets/log/bash_log.txt             # Send any output to this text file (for troubleshooting.)
 ```
 
 You might note that we could cut out the middle man in `crontab --> bash --> R --> twitter`. You totally can. Go for it. 
