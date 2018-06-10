@@ -84,3 +84,10 @@ Where `update_repo.sh` just does:
 #!/bin/bash
 git pull origin master
 ```
+
+
+So my EC2 crontab looks like
+```crontab
+00 01 * * * sudo sh src/tweets/update_repo.sh
+*/5 * * * * sudo sh src/tweets/run_crontwit.sh
+```
