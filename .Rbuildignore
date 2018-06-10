@@ -6,3 +6,4 @@
 ^Setup.md
 ^\.travis\.yml$
 ^codecov\.yml$
+^\.httr-oauth$

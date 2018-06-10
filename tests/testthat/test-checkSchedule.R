@@ -1,4 +1,4 @@
-context("validateSchedule")
+context("checkSchedule")
 
 
 data(schedule)

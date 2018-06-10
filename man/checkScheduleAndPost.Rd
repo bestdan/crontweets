@@ -4,13 +4,18 @@
 \alias{checkScheduleAndPost}
 \title{checkScheduleAndPost}
 \usage{
-checkScheduleAndPost(schedule, tweet_db = NULL)
+checkScheduleAndPost(schedule, tweet_db = NULL, minute_range = NULL,
+  now = NULL)
 }
 \arguments{
 \item{schedule}{A \code{\link{schedule}} object.}
 
 \item{tweet_db}{Either an in-memory \code{\link{tweet_db}} object, or a file path to one. This is
 a convenience function which sits inside other functions just to parse path vs object.}
+
+\item{minute_range}{The range in minutes to allow for a different, and still post. Defaults to 3.}
+
+\item{now}{Optional. A prespecified time-date object if you want to supply one.}
 }
 \description{
 A top level function usually called by cron and a command-line-interface.

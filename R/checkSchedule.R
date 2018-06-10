@@ -54,7 +54,9 @@ replaceWildcard <- Vectorize(function(x, type){
 nowFormatted <- function(now=NULL){
   if(is.null(now)){
     now <- Sys.time() 
-  } 
+  } else {
+    if(!any(class(now) %in% c( "POSIXct", "POSIXt"))) stop(paste0("now, if supplied, must be of class POSIXct or POSIXt. Supplied: ", class(now), ": ", now))
+  }
 
   now_formatted <- list(minute = as.numeric(format(now, "%M")), 
                         hour   = as.numeric(format(now, "%H")), 

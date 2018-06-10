@@ -23,5 +23,5 @@ postTweet <- function(tweetx, ...){
     twitteR::tweet(text = tweetx$tweet_text, 
                    ...)  
   }
-  
+  return(NULL)
 }

@@ -1,14 +1,18 @@
 #' @name getTweetMatch
-#' @title getTweetByCategory
-#' @description Get a random set of tweets from the \code{\link{tweet_db}}. 
+#' @title getTweetmatch
+#' @description Get tweets that match a category or id. 
 #' @inheritParams filterSchedule
 #' @inheritParams loadTweetDB
 #' @export
 #' @examples 
 #' data(tweet_db)
-#' getTweetByCategory(category="animals", tweet_db=tweet_db)
+#' data(schedule)
+#' getTweetMatch(schedule[1,], tweet_db=tweet_db)
 
 getTweetMatch <- function(schedule_item, tweet_db){
+  schedule_item <- as.list(schedule_item)
+  validateSchedule(schedule_item)
+  
   tweet_db <- loadTweetDB(tweet_db)
  
   if(!is.na(schedule_item$id)){

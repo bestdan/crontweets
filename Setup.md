@@ -150,18 +150,16 @@ Those `postRandomTweet.sh` files above are bash [shell scripts](https://fileinfo
 if(!require(pacman)) install.packages("pacman", repos='http://cran.us.r-project.org')
 pacman::p_load(twitteR, yaml)
 
-#' This is the script that is run as a cron job.
-source("src/myscellany/degan_tweets/getRandomTweet.R")
-source("src/myscellany/degan_tweets/postRandomTweet.R")
+twitter_creds <- yaml.load_file("~/src/degan_creds.yaml")$twitter
 
-twitter_creds <- yaml.load_file("src/degan_creds.yaml")$twitter
+getOption("httr_oauth_cache")
 
 setup_twitter_oauth(consumer_key = twitter_creds$consumer_key, 
                     consumer_secret = twitter_creds$consumer_secret, 
                     access_token = twitter_creds$access_token, 
                     access_secret = twitter_creds$access_token_secret)
 
-result <- postRandomTweet()
+checkScheduleAndPost(schedule, tweet_db)
 
 write(paste0(result, ",     ", Sys.time()),
       file="src/myscellany/degan_tweets/log/tweet_log.txt",append=TRUE)
