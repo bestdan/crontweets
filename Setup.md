@@ -1,5 +1,10 @@
 
-# Overview
+## Overview
+What `crontwit` does is very simple:  
+* Creates and validates a `tweet_db` database of tweets. 
+* Creates and validates a `schedule` you want to post on. 
+* Checks if the current time matches a schedule item, and posts any matching tweets.
+
 
 In this guide, I'll go through: 
 - Getting and storing your twitter credentials
@@ -12,11 +17,11 @@ In this guide, I'll go through:
 
 
 
-# Step 1: Getting and storing your twitter API credentials: 
-## Getting your API keys
+## Step 1: Getting and storing your twitter API credentials: 
+### Getting your API keys
 In order to post tweets via the Twitter API, you'll need to setup your Twitter account to allow an API connections, and get your API credentials. You can read how to do that [here](https://medium.com/@GalarnykMichael/accessing-data-from-twitter-api-using-r-part1-b387a1c7d3e). 
 
-## Storing your credentials
+### Storing your credentials
 
 :closed_lock_with_key: **Critical Security note** :closed_lock_with_key: : You should never store or transmit your credentials in public using plain-text that someone else can see. For example, don't store them in a public github repo :no_good: . 
 
@@ -42,13 +47,9 @@ github:
 
 However you decide to deploy your crontwit schedule, you'll need to have the local path to these credentials. For example, I store mine in `~/src/twitter_credentials.yaml` on my local computer, and `~/creds/twitter_credentials.yaml` on my EC2 instance. 
 
-# Step 2: Making, using and storing your `schedule` and `tweet_db` 
-What `crontwit` does is very simple:  
-* Create a `tweet_db` database of tweets. 
-* Create a schedule you want to post on. 
-* Checks if the current time matches a schedule item, and posts any matches
+## Step 2: Making, using and storing your `schedule` and `tweet_db` 
 
-## Making a `tweet_db` library of content
+### Making a `tweet_db` library of content
 Your content is stored in an object called `tweet_db`. You can build out this library and save it down locally like this:
 
 ```r
@@ -58,10 +59,10 @@ tweet_db <- addNewTweetToDB("I don't like sardines." , category="food"   , tweet
 save(tweet_db, file =file.path("~","Desktop", "tweet_db.rda"))
 ```
 
-We'll then use that `tweet_db.rda` file on EC2 as the source of our tweets.
+We'll then use that `tweet_db.rda` file as the source of our tweets.
 
 
-## Making a crontab-like `schedule` in R
+### Making a crontab-like `schedule` in R
 The `schedule` object holds a cron-like set of data for knowing when to post what. Here's an example:
 
 ```r
@@ -72,12 +73,12 @@ The `schedule` object holds a cron-like set of data for knowing when to post wha
 > 4      0    7  NA   wakeup NA
 ```
 
-Much like a contab there is an entry for minut, hour, and day-of-week (dow). There are additional fields category and id. 
+Much like a contab there is an entry for minute, hour, and day-of-week (dow). There are additional fields category and id for pulling specific tweets or picking at random from a category.
 
 
-# Step 3: Setting up crontabs and shell scripts
+## Step 3: Setting up crontabs and shell scripts
 
-## Setting up crontab
+### Setting up crontab
 The way I went about running the schedule was using crontab, which is a local utility that comes with linux and mac computers. Effectively, you tell the computer to run a file on a schedule. To open crontab, in a terminal go:
 
 ```bash
@@ -133,17 +134,17 @@ checkScheduleAndPost(schedule, tweet_db)
 
 ```
 
-# Step 4: Updating your library
+## Step 4: Updating your library
 How do you get new content into your tweet_db, or change your schedule? I'd suggest a nightly run via crontab pulling through a web-based service like github, dropbox, or S3. 
 
-## crontab + github
+### crontab + github
 This solution uses crontab to run a daily sync via g
 
-# Tangent: An AWS EC2 guide
+## Tangent: An AWS EC2 guide
 
 [Here](ec2_setup.md)
 
-# Step 5: Troubleshooting
+## Step 5: Troubleshooting
 
 ```bash
 #!/bin/bash
@@ -158,7 +159,7 @@ One nasty potential problem (I've never experienced it) is if the machine (EC2 e
 I should probably make some kind of time-zone argument to the `schedule`. Pull requests are welcome! 
 
 
-# Background
+## Background
 I generally try to write ever-green/non-ephemeral [articles](http://www.dpegan.com/optimal_behavior/). I then periodically share random pieces of content on twitter, which helps people keep discovering relevant ideas. I appreciate it when other people do this, so I thought I would do it myself.
  
 I used to pay ~$500 a year for [MeetEdgar](www.meetedgar.com). It maintained a categorical library of social media content, and posts random things at pre-apppointed times from different categories. 
