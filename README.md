@@ -1,6 +1,8 @@
-## crontwit
+## crontwit: Build, manage, and schedule posts of tweets.
 [![Travis build status](https://travis-ci.org/bestdan/crontweets.svg?branch=master)](https://travis-ci.org/bestdan/crontweets)
 [![Coverage status](https://codecov.io/gh/bestdan/crontweets/branch/master/graph/badge.svg)](https://codecov.io/github/bestdan/crontweets?branch=master)
+
+
 
 * Create and validate a `tweet_db` database of tweets. 
 * Create and validate a `schedule` you want to post on. 

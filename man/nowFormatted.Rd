@@ -13,5 +13,5 @@ nowFormatted(now = NULL)
 Returns the current datetime in a list.
 }
 \examples{
-crontweets:::nowFormatted()
+crontwit:::nowFormatted()
 }
