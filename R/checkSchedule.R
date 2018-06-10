@@ -2,6 +2,7 @@
 #' @title checkSchedule
 #' @description Check if any of the parsed schedules match the current time. 
 #' @inheritParams validateSchedule
+#' @inheritParams nowFormatted
 #' @param minute_range The range in minutes to allow for a different, and still post. Defaults to 3.
 #' @export
 #' @examples 
@@ -46,17 +47,18 @@ replaceWildcard <- Vectorize(function(x, type){
 #' @name nowFormatted
 #' @title nowFormatted
 #' @description Returns the current datetime in a list. 
+#' @param now Optional. A prespecified time-date object if you want to supply one.
 #' @examples 
 #' crontweets:::nowFormatted()
 
-nowFormatted <- function(now_st=NULL){
-  if(is.null(now_st)){
-    now_st <- Sys.time() 
+nowFormatted <- function(now=NULL){
+  if(is.null(now)){
+    now <- Sys.time() 
   } 
 
-  now_formatted <- list(minute = as.numeric(format(now_st, "%M")), 
-                        hour   = as.numeric(format(now_st, "%H")), 
-                        dow    = as.numeric(as.POSIXlt(now_st)$wday))  
+  now_formatted <- list(minute = as.numeric(format(now, "%M")), 
+                        hour   = as.numeric(format(now, "%H")), 
+                        dow    = as.numeric(as.POSIXlt(now)$wday))  
   return(now_formatted)
 }
 # nowFormatted()

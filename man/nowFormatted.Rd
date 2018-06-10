@@ -4,7 +4,10 @@
 \alias{nowFormatted}
 \title{nowFormatted}
 \usage{
-nowFormatted(now_st = NULL)
+nowFormatted(now = NULL)
+}
+\arguments{
+\item{now}{Optional. A prespecified time-date object if you want to supply one.}
 }
 \description{
 Returns the current datetime in a list.

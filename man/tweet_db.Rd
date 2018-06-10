@@ -19,7 +19,6 @@ A data.frame holding the relevant data for the tweet database. Built by \code{\l
 \examples{
 tweet_db <- addNewTweetToDB("I like cats"     , category="animals")
 tweet_db <- addNewTweetToDB("I like dogs too.", category="animals", tweet_db = tweet_db)
-tweet_db <- addNewTweetToDB("I don't like sardines.", 
-                            category="food", tweet_db = tweet_db, ask=FALSE)
+tweet_db <- addNewTweetToDB("I don't like sardines.", category="food", tweet_db = tweet_db)
 tweet_db
 }

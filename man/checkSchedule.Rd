@@ -10,6 +10,8 @@ checkSchedule(schedule, minute_range, now = NULL)
 \item{schedule}{A \code{\link{schedule}} object.}
 
 \item{minute_range}{The range in minutes to allow for a different, and still post. Defaults to 3.}
+
+\item{now}{Optional. A prespecified time-date object if you want to supply one.}
 }
 \description{
 Check if any of the parsed schedules match the current time.
