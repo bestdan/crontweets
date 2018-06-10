@@ -1,4 +1,4 @@
 library(testthat)
-library(crontweets)
+library(crontwit)
 
-test_check("crontweets")
+test_check("crontwit")

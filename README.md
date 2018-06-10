@@ -1,4 +1,4 @@
-## crontweets
+## crontwit
 [![Travis build status](https://travis-ci.org/bestdan/crontweets.svg?branch=master)](https://travis-ci.org/bestdan/crontweets)
 [![Coverage status](https://codecov.io/gh/bestdan/crontweets/branch/master/graph/badge.svg)](https://codecov.io/github/bestdan/crontweets?branch=master)
 

@@ -1,4 +1,4 @@
-Package: crontweets
+Package: crontwit
 Version: 0.0.0.9000
 Title: Schedule and post twitter content
 Description: Build, manage, and schedule posts of tweets to be deployed through a bot.

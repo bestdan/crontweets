@@ -7,7 +7,7 @@
 #' @param now A properlay formatted \code{now} object, as produced by \code{\link{nowFormatted}}.
 #' @export
 #' @examples 
-#' now <- crontweets:::nowFormatted()
+#' now <- crontwit:::nowFormatted()
 #' data(schedule)
 #' filterSchedule(schedule_item = schedule[1,], now = now)
 

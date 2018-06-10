@@ -6,7 +6,7 @@
 #' @param minute_range The range in minutes to allow for a different, and still post. Defaults to 3.
 #' @export
 #' @examples 
-#' now <- crontweets:::nowFormatted()
+#' now <- crontwit:::nowFormatted()
 #' data(schedule)
 #' checkSchedule(schedule = schedule, minute_range=5)
 
@@ -49,7 +49,7 @@ replaceWildcard <- Vectorize(function(x, type){
 #' @description Returns the current datetime in a list. 
 #' @param now Optional. A prespecified time-date object if you want to supply one.
 #' @examples 
-#' crontweets:::nowFormatted()
+#' crontwit:::nowFormatted()
 
 nowFormatted <- function(now=NULL){
   if(is.null(now)){
