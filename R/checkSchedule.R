@@ -7,7 +7,7 @@
 #' @examples 
 #' now <- crontweets:::nowFormatted()
 #' data(schedule)
-#' scheduleCheck(schedule = schedule, minute_range=5)
+#' checkSchedule(schedule = schedule, minute_range=5)
 
 checkSchedule <- function(schedule, minute_range){
   
@@ -45,11 +45,10 @@ replaceWildcard <- Vectorize(function(x, type){
 
 #' @name nowFormatted
 #' @title nowFormatted
-#' @description breaks apart time object to check for matches
+#' @description Returns the current datetime in a list. 
 #' @examples 
-#' nowFormatted()
+#' crontweets:::nowFormatted()
 
-#' Returns the current datetime in a list. 
 nowFormatted <- function(){
   now_st <- Sys.time()
   now_formatted <- list(minute = as.numeric(format(now_st, "%M")), 

@@ -1,9 +1,8 @@
 #' @name getTweetMatch
 #' @title getTweetByCategory
 #' @description Get a random set of tweets from the \code{\link{tweet_db}}. 
-#' @param category A category to filter the resulting tweets by.  \code{NULL} by default.
-#' @param n How many tweets do you want? Defaults to 1, but if you use 'all', it will pull all. 
-#' @param tweet_db Either a tweet_db object, or a filepath to such an object.
+#' @inheritParams filterSchedule
+#' @inheritParams loadTweetDB
 #' @export
 #' @examples 
 #' data(tweet_db)

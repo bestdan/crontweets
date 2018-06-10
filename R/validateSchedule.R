@@ -5,8 +5,12 @@
 #' @export
 #' @examples 
 #' data(schedule)
+#' validateSchedule(schedule)
+#' 
+#' \dontrun{
 #' schedule$minute[3] <- 123
 #' validateSchedule(schedule)
+#' }
 
 validateSchedule <- function(schedule){
   

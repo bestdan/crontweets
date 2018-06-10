@@ -5,10 +5,11 @@
 #' @inheritParams checkSchedule
 #' @param schedule_item A single row of a \code{\link{schedule}}.
 #' @param now A properlay formatted \code{now} object, as produced by \code{\link{nowFormatted}}.
+#' @export
 #' @examples 
-#' now <- crontweets::nowFormatted()
+#' now <- crontweets:::nowFormatted()
 #' data(schedule)
-#' filterSchedule(now = nowFormatted(), schedule_item = schedule[1,])
+#' filterSchedule(schedule_item = schedule[1,], now = now)
 
 filterSchedule <- function(schedule_item, now, minute_range=3){
   schedule_item <- as.list(schedule_item)

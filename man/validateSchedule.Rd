@@ -14,6 +14,10 @@ Validate that all entries in a schedule object are ok.
 }
 \examples{
 data(schedule)
+validateSchedule(schedule)
+
+\dontrun{
 schedule$minute[3] <- 123
 validateSchedule(schedule)
+}
 }

@@ -17,7 +17,7 @@ filterSchedule(schedule_item, now, minute_range = 3)
 Pass a boolean about whether or not a schedule_item is to be posted.
 }
 \examples{
-now <- crontweets::nowFormatted()
+now <- crontweets:::nowFormatted()
 data(schedule)
-filterSchedule(now = nowFormatted(), schedule_item = schedule[1,])
+filterSchedule(schedule_item = schedule[1,], now = now)
 }

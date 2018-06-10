@@ -16,6 +16,3 @@ A tweet_db object
 \description{
 Loads
 }
-\examples{
-loadTweetDB()
-}

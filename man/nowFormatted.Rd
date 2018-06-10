@@ -7,9 +7,8 @@
 nowFormatted()
 }
 \description{
-breaks apart time object to check for matches
+Returns the current datetime in a list.
 }
 \examples{
-nowFormatted()
-Returns the current datetime in a list. 
+crontweets:::nowFormatted()
 }

@@ -7,11 +7,10 @@
 getTweetMatch(schedule_item, tweet_db)
 }
 \arguments{
-\item{tweet_db}{Either a tweet_db object, or a filepath to such an object.}
+\item{schedule_item}{A single row of a \code{\link{schedule}}.}
 
-\item{category}{A category to filter the resulting tweets by.  \code{NULL} by default.}
-
-\item{n}{How many tweets do you want? Defaults to 1, but if you use 'all', it will pull all.}
+\item{tweet_db}{Either an in-memory \code{\link{tweet_db}} object, or a file path to one. This is
+a convenience function which sits inside other functions just to parse path vs object.}
 }
 \description{
 Get a random set of tweets from the \code{\link{tweet_db}}.

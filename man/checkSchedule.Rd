@@ -17,5 +17,5 @@ Check if any of the parsed schedules match the current time.
 \examples{
 now <- crontweets:::nowFormatted()
 data(schedule)
-scheduleCheck(schedule = schedule, minute_range=5)
+checkSchedule(schedule = schedule, minute_range=5)
 }
