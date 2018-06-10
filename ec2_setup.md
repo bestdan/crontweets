@@ -45,7 +45,7 @@ chmod 7503
 ```
 Then I could use `R` packages like [devtools](https://github.com/r-lib/devtools). 
 
-# Getting your credentials file onto the EC2 instance. 
+## Getting your credentials file onto the EC2 instance. 
 There are two ways I know of to get your `twitter_credentials.yaml` file onto an EC2 instance: copy/paste and file transfer. 
 
 
@@ -68,13 +68,19 @@ sudo nano twitter_credentials.yaml
 Make sure you have proper indentation! 
 
 
-# Getting your tweet_db onto the EC2 instance
+## Managing your `tweet_db` and `schedule` on the EC2 instance
 
-github
-periodic updates with a cron bash script 
+How do you get new content into your tweet_db, or change your schedule? One way is to do a nightly run via crontab pulling through a web-based service like github, dropbox, or S3. 
 
-## Using github
-- Don't mind if people see what you post. 
-Then, when ssh'd into the EC2 instance, I used git/github to pull down `myscellany`. 
+For example, if you keep your `schedule` and `tweet_db` in a github repo called `my_tweet_objects` in your crontab file, include a line: 
 
-Local R --> Github --> EC2 instance
+```bash
+05 01 * * * sudo sh ~/src/my_tweet_objects/update_repo.sh
+```
+
+Where `update_repo.sh` just does:  
+
+```bash
+#!/bin/bash
+git pull origin master
+```

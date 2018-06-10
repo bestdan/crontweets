@@ -91,8 +91,7 @@ It should open up an empty file. You can add entries to follow any schedule you 
 */5 * * * * sudo sh ~/src/myscellany/degan_tweets/run_crontwit.sh
 ```
 
-
-I'm going to use bash [shell scripts](https://fileinfo.com/extension/sh) in my crontab. They tell the computer what to do. For example, `run_crontwit.sh` is:
+I'm going to wrap my `R` code in bash [shell scripts](https://fileinfo.com/extension/sh) in my crontab. It makes it slightly easier to troubleshoot later if necessary. For example, `run_crontwit.sh` is:
  
  ```bash
  #!/bin/bash                                                             # Hi! I'm a bash file. 
@@ -101,12 +100,13 @@ I'm going to use bash [shell scripts](https://fileinfo.com/extension/sh) in my c
 } >> src/myscellany/degan_tweets/log/bash_log.txt                        # Send any output to this text file (for troubleshooting.)
 ```
 
-> crontab --> bash --> R --> twitter
+You might note that we could cut out the middle man in `crontab --> bash --> R --> twitter`. You totally can. Go for it. 
 
-`run_crontwit.R` is an R Script file which ensures that R has all the material/packages it needs, and then runs my schedul
+Anyways, `run_crontwit.R` is an R Script file which ensures that R has all the material/packages it needs, and then runs my `schedule` and `tweet_db`. 
 
 
 ```r
+#' @title run_crontwit.R
 #' Ensure you have dependencies. 
 if(!require(pacman)) install.packages("pacman", repos='http://cran.us.r-project.org')
 pacman::p_load(twitteR, yaml)
@@ -117,7 +117,7 @@ creds_path <- "~/src/degan_creds.yaml"
 schedule_path <- "~/src/schedule.rda"
 tweet_db_path <- "~/src/tweet_db.rda"
 
-twitter_creds <- yaml.load_file()$twitter
+twitter_creds <- yaml.load_file(creds_path)$twitter
 
 # Tell it to auto-cache the credentials
 getOption("httr_oauth_cache")
@@ -126,26 +126,23 @@ setup_twitter_oauth(consumer_key = twitter_creds$consumer_key,
                     access_token = twitter_creds$access_token, 
                     access_secret = twitter_creds$access_token_secret)
 
-# load schedule
+# Load schedule
 load(schedule_path)
 load(tweet_db_path)
 
+# Check schedule and post if necessary. 
 checkScheduleAndPost(schedule, tweet_db)
 
 ```
-
-## Step 4: Updating your library
-How do you get new content into your tweet_db, or change your schedule? I'd suggest a nightly run via crontab pulling through a web-based service like github, dropbox, or S3. 
-
-### crontab + github
-This solution uses crontab to run a daily sync via g
 
 ## Tangent: An AWS EC2 guide
 
 [Here](ec2_setup.md)
 
 ## Step 5: Troubleshooting
-
+As
+### Recording output
+As I noted earlier, wrapping your R code in a bash script can give more meaningful logs than R. So this script writes a log to `bash_log.txt` where I can see what the issue was. 
 ```bash
 #!/bin/bash
 {
