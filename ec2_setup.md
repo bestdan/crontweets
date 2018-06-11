@@ -25,7 +25,7 @@ the `ssh -i` is the command, the first argument `~/src/dan_tweets.pem` is where 
 
 You know you'll be successfully logged in because you'll see a screen like this one:  
   
-  ![](ec2_login_screen.png "EC2 login screen")
+  ![](inst/exdata/ec2_login_screen.png "EC2 login screen")
 
 ### Install R
 
@@ -58,7 +58,7 @@ sudo nano crontab -e
 
 
 #### Copy/Paste
-When ssh'd into your EC2 instance, use the nano text editor to create a new yaml file. 
+When ssh'd into your EC2 instance, use the nano text editor to create a new yaml file in `/src/`.
 ```bash
 sudo nano twitter_credentials.yaml
 --- in nano, paste credentials ---
@@ -72,7 +72,11 @@ Make sure you have proper indentation!
 
 How do you get new content into your tweet_db, or change your schedule? One way is to do a nightly run via crontab pulling through a web-based service like github, dropbox, or S3. 
 
-For example, if you keep your `schedule` and `tweet_db` in a github repo called `my_tweet_objects` in your crontab file, include a line: 
+## Using a package
+I ended up creating a data package to manage my content and scripts. You can see it [here](https://github.com/bestdan/dpegantwitlib). The upside is that it's github-managed. 
+I put my bash files in `inst/exdata/`. 
+
+For example, if you keep your `schedule` and `tweet_db` in a github repo called dpegantwitlib in your crontab file, include a line: 
 
 ```bash
 05 01 * * * sudo sh ~/src/my_tweet_objects/update_repo.sh
