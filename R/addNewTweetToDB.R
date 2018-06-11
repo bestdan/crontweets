@@ -6,7 +6,6 @@
 #' @param media_path A file-path to a picture or something you want to share. 
 #' @param tweet_db Allows you to pass an in-memory database in to continue building it out. 
 #' @importFrom digest sha1
-#' @importFrom utils askYesNo
 #' @export
 #' @examples 
 #' addNewTweetToDB("TestTweet", category="test")

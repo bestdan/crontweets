@@ -16,7 +16,6 @@ Suggests:
     covr
 Imports:
     digest,
-    twitteR, 
-    utils
+    twitteR
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
