@@ -33,10 +33,10 @@ test_that("checkSchedule: Modifying now to fake positive works", {
 })
 
 
-test_that("checkSchedule: wildcard works", {
+test_that("checkSchedule: wildcard works on dow", {
   
   #  Change schedule
-  now <- as.POSIXct(strptime("00:07 2018-06-10", format="%M:%H %Y-%m-%d"))
+  now <- as.POSIXct(strptime("00:07 2018-06-11", format="%M:%H %Y-%m-%d"))
   res <- checkSchedule(schedule = schedule, minute_range=5, now=now)
   
   expect_equal(1, nrow(res))
