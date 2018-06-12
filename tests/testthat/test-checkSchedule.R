@@ -36,7 +36,7 @@ test_that("checkSchedule: Modifying now to fake positive works", {
 test_that("checkSchedule: wildcard works on dow", {
   
   #  Change schedule
-  now <- as.POSIXct(strptime("00:07 2018-06-11", format="%M:%H %Y-%m-%d"))
+  now <- as.POSIXct(strptime("00:07 2018-06-11", format="%M:%H %Y-%m-%d"), tz=tz = Sys.timezone())
   res <- checkSchedule(schedule = schedule, minute_range=5, now=now)
   
   expect_equal(1, nrow(res))
@@ -45,13 +45,17 @@ test_that("checkSchedule: wildcard works on dow", {
   
 })
 
-test_that("checkSchedule: wildcard works", {
+test_that("checkSchedule: multiple items returned", {
   
   #  Change schedule
-  now <- as.POSIXct(strptime("05:12 2018-06-13", format="%M:%H %Y-%m-%d"))
+  now <- as.POSIXct(strptime("05:12 2018-06-13", format="%M:%H %Y-%m-%d"), tz = Sys.timezone())
   res <- checkSchedule(schedule = schedule, minute_range=5, now=now)
   
   expect_equal(2, nrow(res))
   expect_equal(res$category, c("animals","food"))
   
+})
+
+test_that("checkSchedule: time zones are respected", {
+  tz <- "Europe/London"
 })

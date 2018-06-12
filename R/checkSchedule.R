@@ -17,9 +17,9 @@ checkSchedule <- function(schedule, minute_range, now = NULL){
   now <- nowFormatted(now)
   
   parsed_schedule <- schedule
-  parsed_schedule$minute <- replaceWildcard(schedule$minute, type = "minute")
-  parsed_schedule$hour <- replaceWildcard(schedule$hour, type = "hour")
-  parsed_schedule$dow <- replaceWildcard(schedule$dow, type = "dow")
+  parsed_schedule$minute <- replaceWildcard(schedule$minute, type = "minute", tz=schedule$tz)
+  parsed_schedule$hour <- replaceWildcard(schedule$hour, type = "hour", tz=schedule$tz)
+  parsed_schedule$dow <- replaceWildcard(schedule$dow, type = "dow", tz=schedule$tz)
   
   matched_schedules <- parsed_schedule[apply(parsed_schedule, 1,
                                              filterSchedule,
@@ -31,10 +31,13 @@ checkSchedule <- function(schedule, minute_range, now = NULL){
 
 
 # Replaces wildcards (NAs) with the current value.
-replaceWildcard <- Vectorize(function(x, type){
+# NOTE: time zone is time zone to be posted in! 
+replaceWildcard <- Vectorize(function(x, type, tz){
   if(!is.na(x)) return(x)
   
-  now <-  Sys.time()
+  now <- as.POSIXct(Sys.time())
+  attributes(now)$tzone <- tz
+  
   y <- switch(type, 
               minute = as.numeric(format(now,'%M')), 
               hour = as.numeric(format(now,'%H')),

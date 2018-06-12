@@ -16,6 +16,14 @@ validateSchedule <- function(schedule){
   
   dow_failures <- which(!schedule$dow %in% seq(0,6) & !is.na(schedule$dow))
   
+  valid_names <- c("minute", "hour", "dow", "tz", "category", "id")
+  
+  namecheck <- sort(names(schedule)) == sort(c("minute", "hour", "dow", "tz", "category", "id"))
+  
+  if(any(!namecheck)){
+    stop("schedule must have column names ", paste0(valid_names, collapse = ", "))
+  }
+  
   if(length(dow_failures) > 0){
     stop(paste0("All dow entries must be one of integers 0 to 6. These rows fail: ", 
                 paste(dow_failures, collapse = ",")))
