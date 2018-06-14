@@ -15,10 +15,11 @@ test_that("checkScheduleAndPost: Finds valid post, pushes it.", {
   #' Perhaps vcr would be helpful.   https://github.com/ropensci/vcr
 
   #  Change schedule
-  now <- Sys.time()
+  now <- lubridate::now(tzone = "UTC")
   schedule$minute[1] <- as.numeric(format(now, format="%M"))
   schedule$hour[1]   <- as.numeric(format(now, format="%H"))
   schedule$dow[1]    <- as.numeric(as.POSIXlt(now)$wday)
+  schedule$tz[1]    <- lubridate::tz(now)
   
   expect_error(
     checkScheduleAndPost(schedule = schedule, tweet_db, minute_range=5, now=now),

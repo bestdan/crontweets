@@ -20,7 +20,7 @@ checkScheduleAndPost <- function(schedule, tweet_db=NULL, minute_range = 3, now=
     
     results <- apply(matched_items, MARGIN = 1, 
                      FUN = getTweetMatch, 
-                      tweet_db=tweet_db)
+                     tweet_db=tweet_db)
     
     lapply(results, 
            postTweet, 

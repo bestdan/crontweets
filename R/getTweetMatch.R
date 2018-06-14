@@ -7,11 +7,12 @@
 #' @examples 
 #' data(tweet_db)
 #' data(schedule)
-#' getTweetMatch(schedule[1,], tweet_db=tweet_db)
+#' getTweetMatch(schedule[1,, drop=FALSE], tweet_db=tweet_db)
 
 getTweetMatch <- function(schedule_item, tweet_db){
+  
   schedule_item <- as.list(schedule_item)
-  validateSchedule(schedule_item)
+  
   
   tweet_db <- loadTweetDB(tweet_db)
  

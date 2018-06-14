@@ -18,5 +18,5 @@ Get tweets that match a category or id.
 \examples{
 data(tweet_db)
 data(schedule)
-getTweetMatch(schedule[1,], tweet_db=tweet_db)
+getTweetMatch(schedule[1,, drop=FALSE], tweet_db=tweet_db)
 }
