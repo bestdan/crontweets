@@ -9,7 +9,7 @@ filterSchedule(schedule_item, now, minute_range = 3)
 \arguments{
 \item{schedule_item}{A single row of a \code{\link{schedule}}.}
 
-\item{now}{A properlay formatted \code{now} object, as produced by \code{\link{nowFormatted}}.}
+\item{now}{A properlay formatted \code{now} object, as produced by \code{\link{nowFormatted}}. Represents the computers current timezone, not the scheudled items tz.}
 
 \item{minute_range}{The range in minutes to allow for a different, and still post. Defaults to 3.}
 }
@@ -17,7 +17,8 @@ filterSchedule(schedule_item, now, minute_range = 3)
 Pass a boolean about whether or not a schedule_item is to be posted.
 }
 \examples{
-now <- crontwit:::nowFormatted()
+current_time <- as.POSIXlt("2018-06-13 11:00:55", tz = "GMT")
+now <- crontwit:::nowFormatted(current_time)
 data(schedule)
-filterSchedule(schedule_item = schedule[1,], now = now)
+filterSchedule(schedule_item = schedule[7,], now = now)
 }

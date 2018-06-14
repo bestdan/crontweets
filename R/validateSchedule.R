@@ -46,6 +46,13 @@ validateSchedule <- function(schedule){
                 paste(overlap_failures, collapse = ",")))
   }
   
+  na_list <- apply(schedule, 1, function(x) all(is.na(x["minute"]), is.na(x["hour"]), is.na(x["dow"])))
+  if(any(na_list)){
+    na_fails <- schedule[which(na_list),]
+    stop(paste0("Each schedule item cannot have NA's for all time fields. These rows fail:  ", 
+                paste(na_fails, collapse = ",")))
+    
+  }
   
 }
 

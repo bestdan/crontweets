@@ -15,11 +15,10 @@ checkSchedule <- function(schedule, minute_range, now = NULL){
   validateSchedule(schedule)
   
   now <- nowFormatted(now)
-  
-  parsed_schedule <- schedule
-  parsed_schedule$minute <- replaceWildcard(schedule$minute, type = "minute", tz=schedule$tz)
-  parsed_schedule$hour   <- replaceWildcard(schedule$hour, type = "hour", tz=schedule$tz)
-  parsed_schedule$dow    <- replaceWildcard(schedule$dow, type = "dow", tz=schedule$tz)
+
+  # Wildcards are all parsed in terms of the *items*s time zone. 
+  parsed_schedule <- parseSchedule(schedule, now)
+    
   
   matched_schedules <- parsed_schedule[apply(parsed_schedule, 1,
                                              filterSchedule,
@@ -29,42 +28,3 @@ checkSchedule <- function(schedule, minute_range, now = NULL){
 }
 # scheduleCheck(schedule, 3)
 
-
-# Replaces wildcards (NAs) with the current value.
-# NOTE: time zone is time zone to be posted in! 
-replaceWildcard <- Vectorize(function(x, type, tz){
-  if(!is.na(x)) return(x)
-  
-  now <- as.POSIXct(Sys.time()) #Note use of system time. Need to convert to tz of schedule_item.
-  attributes(now)$tzone <- tz
-  
-  y <- switch(type, 
-              minute = as.numeric(format(now,'%M')), 
-              hour = as.numeric(format(now,'%H')),
-              dow =  as.numeric(as.POSIXlt(now)$wday))
-  return(y)
-})
-# replaceWildcard <- Vectorize(replaceWildcard)
-# replaceWildcard(NA, "hour")
-
-#' @name nowFormatted
-#' @title nowFormatted
-#' @description Returns the current datetime in a list. 
-#' @param now Optional. A prespecified time-date object if you want to supply one.
-#' @examples 
-#' crontwit:::nowFormatted()
-
-# NEED TO CONSIDER TIME ZONES. BUT I"M TOO TIRE NOW> 
-nowFormatted <- function(now=NULL){
-  if(is.null(now)){
-    now <- Sys.time() 
-  } else {
-    if(!any(class(now) %in% c( "POSIXct", "POSIXt"))) stop(paste0("now, if supplied, must be of class POSIXct or POSIXt. Supplied: ", class(now), ": ", now))
-  }
-  
-  now_formatted <- list(minute = as.numeric(format(now, "%M")), 
-                        hour   = as.numeric(format(now, "%H")), 
-                        dow    = as.numeric(as.POSIXlt(now)$wday))  
-  return(now_formatted)
-}
-# nowFormatted()

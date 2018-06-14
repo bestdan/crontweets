@@ -1,5 +1,5 @@
 #' Creating a schedule object
-schedule <- data.frame(minute   = 00,
+schedule <- data.frame(minute   = NA,
                        hour     = 08,
                        dow      = 1,
                        tz       = "America/New_York",
@@ -8,7 +8,7 @@ schedule <- data.frame(minute   = 00,
 
 schedule <- rbind(schedule,
                   data.frame(minute   = 05,
-                             hour     = 12,
+                             hour     = NA,
                              dow      = 3,
                              tz       = "America/New_York",
                              category = "animals", 
@@ -25,8 +25,31 @@ schedule <- rbind(schedule,
 schedule <- rbind(schedule,
                   data.frame(minute   = 00,
                              hour     = 07,
+                             dow      = 1,
+                             tz       = "America/New_York",
+                             category = "wakeup", 
+                             id       = NA))
+schedule <- rbind(schedule,
+                  data.frame(minute   = 00,
+                             hour     = 07,
                              dow      = NA,
                              tz       = "America/New_York",
+                             category = "wakeup", 
+                             id       = NA))
+
+schedule <- rbind(schedule,
+                  data.frame(minute   = 00,
+                             hour     = 07,
+                             dow      = NA,
+                             tz       = "GMT",
+                             category = "wakeup", 
+                             id       = NA))
+
+schedule <- rbind(schedule,
+                  data.frame(minute   = 00,
+                             hour     = 11,
+                             dow      = 3,
+                             tz       = "GMT",
                              category = "wakeup", 
                              id       = NA))
 
