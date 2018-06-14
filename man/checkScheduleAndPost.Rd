@@ -4,7 +4,7 @@
 \alias{checkScheduleAndPost}
 \title{checkScheduleAndPost}
 \usage{
-checkScheduleAndPost(schedule, tweet_db = NULL, minute_range = NULL,
+checkScheduleAndPost(schedule, tweet_db = NULL, minute_range = 3,
   now = NULL)
 }
 \arguments{

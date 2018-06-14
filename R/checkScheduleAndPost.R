@@ -9,7 +9,7 @@
 #' data(schedule)
 #' checkScheduleAndPost(schedule, tweet_db)
 
-checkScheduleAndPost <- function(schedule, tweet_db=NULL, minute_range = NULL, now=NULL){
+checkScheduleAndPost <- function(schedule, tweet_db=NULL, minute_range = 3, now=NULL){
   
   matched_items <- checkSchedule(schedule,
                                  minute_range =  minute_range, 
