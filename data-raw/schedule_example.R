@@ -2,7 +2,7 @@
 schedule <- data.frame(minute   = NA,
                        hour     = 08,
                        dow      = 1,
-                       tz       = "America/New_York",
+                       tz       = "EST",
                        category = "animals", 
                        id       = NA)
 
@@ -10,7 +10,7 @@ schedule <- rbind(schedule,
                   data.frame(minute   = 05,
                              hour     = NA,
                              dow      = 3,
-                             tz       = "America/New_York",
+                             tz       = "EST",
                              category = "animals", 
                              id       = NA))
 
@@ -18,7 +18,7 @@ schedule <- rbind(schedule,
                   data.frame(minute   = 05,
                              hour     = 12,
                              dow      = 03,
-                             tz       = "America/New_York",
+                             tz       = "EST",
                              category = "food", 
                              id       = NA))
 
@@ -26,14 +26,14 @@ schedule <- rbind(schedule,
                   data.frame(minute   = 00,
                              hour     = 07,
                              dow      = 1,
-                             tz       = "America/New_York",
+                             tz       = "EST",
                              category = "wakeup", 
                              id       = NA))
 schedule <- rbind(schedule,
                   data.frame(minute   = 00,
                              hour     = 07,
                              dow      = NA,
-                             tz       = "America/New_York",
+                             tz       = "EST",
                              category = "wakeup", 
                              id       = NA))
 

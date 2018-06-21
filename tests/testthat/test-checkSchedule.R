@@ -7,8 +7,9 @@ data(schedule)
 test_that("checkSchedule: Modifying 'now' to generate positive matches works.", {
   
   # Fake time to match an entry
-  now <- as.POSIXct(strptime("00:08 2018-06-11", format="%M:%H %Y-%m-%d"), tz =  "America/New_York")
-  expect_error(res <- checkSchedule(schedule = schedule, minute_range=5, now=now), 
+  ex_now <- as.POSIXct(strptime("2018-06-11 08:00", format="%Y-%m-%d %H:%M"), tz =  "EST")
+  expect_error(
+    res <- checkSchedule(schedule = schedule, minute_range=5, now=ex_now), 
                regexp = NA)
   
   expect_equal(1, nrow(res))
@@ -45,7 +46,7 @@ test_that("checkSchedule: Modifying the schedule to generate positive matches wo
 test_that("checkSchedule: wildcard works on dow", {
   
   #  Change schedule
-  now <- as.POSIXct(strptime("00:07 2018-06-11", format="%M:%H %Y-%m-%d"), tz = "America/New_York")
+  now <- as.POSIXct(strptime("00:07 2018-06-11", format="%M:%H %Y-%m-%d"), tz = "EST")
   res <- checkSchedule(schedule = schedule, minute_range=5, now=now)
   
   expect_equal(2, nrow(res))
@@ -57,7 +58,7 @@ test_that("checkSchedule: wildcard works on dow", {
 test_that("checkSchedule: wildcard works on hour", {
   
   #  Change schedule
-  now <- as.POSIXct(strptime("2018-06-13 00:05", format="%Y-%m-%d %H:%M"), tz = "America/New_York")
+  now <- as.POSIXct(strptime("2018-06-13 00:05", format="%Y-%m-%d %H:%M"), tz = "EST")
   res <- checkSchedule(schedule = schedule, minute_range=5, now=now)
   
   expect_equal(1, nrow(res))
@@ -69,7 +70,7 @@ test_that("checkSchedule: wildcard works on hour", {
 test_that("checkSchedule: multiple items returned", {
   
   #  Change schedule
-  now <- as.POSIXct(strptime("2018-06-13 12:05", format="%Y-%m-%d %H:%M"), tz = "America/New_York" )
+  now <- as.POSIXct(strptime("2018-06-13 12:05", format="%Y-%m-%d %H:%M"), tz = "EST" )
   res <- checkSchedule(schedule = schedule, minute_range=5, now=now)
   
   expect_equal(2, nrow(res))
