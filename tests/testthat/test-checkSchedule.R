@@ -10,6 +10,7 @@ test_that("checkSchedule: Modifying 'now' to generate positive matches works.", 
   now <- as.POSIXct(strptime("00:08 2018-06-11", format="%M:%H %Y-%m-%d"), tz =  "America/New_York")
   expect_error(res <- checkSchedule(schedule = schedule, minute_range=5, now=now), 
                regexp = NA)
+  print(res)
   # expect_equal(1, nrow(res))
   # expect_equal(res$category, "animals")
   # expect_equal(res$id, NA)
