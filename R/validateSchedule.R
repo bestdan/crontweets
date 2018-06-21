@@ -16,7 +16,7 @@ validateSchedule <- function(schedule){
   
   valid_names <- c("minute", "hour", "dow", "tz", "category", "id")
   
-  namecheck <- sort(names(schedule)) == sort(c("minute", "hour", "dow", "tz", "category", "id"))
+  namecheck <- sort(names(schedule)) == sort(valid_names)
   
   if(any(!namecheck)){
     stop("schedule must have column names ", paste0(valid_names, collapse = ", "))
