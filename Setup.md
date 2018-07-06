@@ -81,7 +81,7 @@ sudo nano crontab -e
 It should open up an empty file. You can add entries to follow any schedule you want. If you want one which runs the bash fie `run_crontwit.sh` every 5 minutes, it looks like this:
 
 ```crontab
-*/5 * * * * sudo sh ~/src/myscellany/degan_tweets/run_crontwit.sh
+*/5 * * * * sudo sh ~/src/dpegantwitlib/run_crontwit.sh
 ```
 
 I'm going to wrap my `R` code in bash [shell scripts](https://fileinfo.com/extension/sh) in my crontab. It makes it slightly easier to troubleshoot later if necessary. For example, `run_crontwit.sh` is:
@@ -97,7 +97,13 @@ You might note that we could cut out the middle man in `crontab --> bash --> R -
 
 Anyways, `run_crontwit.R` is an R Script file which ensures that R has all the material/packages it needs, and then runs my `schedule` and `tweet_db`. 
 
+In order to install R packages, you'll need to use sudo to launch R. 
 
+```bash
+sudo R
+```
+
+Then, in R:
 ```r
 #' @title run_crontwit.R
 #' Ensure you have dependencies. 
@@ -105,23 +111,20 @@ if(!require(pacman)) install.packages("pacman", repos='http://cran.us.r-project.
 pacman::p_load(twitteR, yaml)
 library(crontwit)
 
-# Load paths
-creds_path <- "~/src/degan_creds.yaml"
-schedule_path <- "~/src/schedule.rda"
-tweet_db_path <- "~/src/tweet_db.rda"
-
+# Load paths. Don't use sudo for this, it messes up the ~/src/.
+creds_path <- "~/src/twitter_credentials.yaml"
 twitter_creds <- yaml.load_file(creds_path)$twitter
 
 # Tell it to auto-cache the credentials
-getOption("httr_oauth_cache")
+options("httr_oauth_cache" = TRUE)
 setup_twitter_oauth(consumer_key = twitter_creds$consumer_key, 
                     consumer_secret = twitter_creds$consumer_secret, 
                     access_token = twitter_creds$access_token, 
                     access_secret = twitter_creds$access_token_secret)
 
 # Load schedule
-load(schedule_path)
-load(tweet_db_path)
+schedule <- dpegantwitlib::schedule
+tweet_db <- dpegantwitlib::tweet_db
 
 # Check schedule and post if necessary. 
 checkScheduleAndPost(schedule, tweet_db)
@@ -148,6 +151,9 @@ As I noted earlier, wrapping your R code in a bash script can give more meaningf
 One nasty potential problem (I've never experienced it) is if the machine (EC2 etc) you deploy your `schedule` on is in a different time zone. 
 I should probably make some kind of time-zone argument to the `schedule`. Pull requests are welcome! 
 
+
+### Using messages to check everything is working
+I use slackr to send me a message once a day that everything is ok. 
 
 ## Background
 I generally try to write ever-green/non-ephemeral [articles](http://www.dpegan.com/optimal_behavior/). I then periodically share random pieces of content on twitter, which helps people keep discovering relevant ideas. I appreciate it when other people do this, so I thought I would do it myself.

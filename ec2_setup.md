@@ -45,6 +45,23 @@ chmod 7503
 ```
 Then I could use `R` packages like [devtools](https://github.com/r-lib/devtools). 
 
+You then need to get crontwit etc. 
+```bash
+sudo R
+```
+Then, in R
+```r
+devtools::install_github("bestdan/crontwit")
+# My specific tweet library.
+devtools::install_github("bestdan/dpegantwitlib")
+```
+
+
+If you want to use git to manage your library:
+```bash
+sudo yum install git
+git clone https://github.com/{your_github_handle}/{your_library}.git
+```
 ## Getting your credentials file onto the EC2 instance. 
 There are two ways I know of to get your `twitter_credentials.yaml` file onto an EC2 instance: copy/paste and file transfer. 
 
@@ -60,12 +77,13 @@ sudo nano crontab -e
 #### Copy/Paste
 When ssh'd into your EC2 instance, use the nano text editor to create a new yaml file in `/src/`.
 ```bash
-sudo nano twitter_credentials.yaml
+mkdir src
+sudo nano src/twitter_credentials.yaml
 --- in nano, paste credentials ---
 ```
 > In nano, to save the changes you've made, press Ctrl + O. To exit nano, type Ctrl + X. If you ask nano to exit from a modified file, it will ask you if you want to save it. Just press N in case you don't, or Y in case you do. [source](https://wiki.gentoo.org/wiki/Nano/Basics_Guide#Saving_and_exiting). 
 
-Make sure you have proper indentation! 
+Make sure you have proper indentation in your yaml file! 
 
 
 ## Managing your `tweet_db` and `schedule` on the EC2 instance
