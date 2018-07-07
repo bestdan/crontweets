@@ -142,8 +142,8 @@ As I noted earlier, wrapping your R code in a bash script can give more meaningf
 ```bash
 #!/bin/bash
 {
-    sudo Rscript src/myscellany/degan_tweets/postRandomTweet_script.R
-} >> src/myscellany/degan_tweets/log/bash_log.txt
+    sudo Rscript src/dpegantwitlib/postRandomTweet_script.R
+} >> src/myscellany/dpegantwitlib/log/bash_log.txt
 ```
 
 
@@ -153,7 +153,9 @@ I should probably make some kind of time-zone argument to the `schedule`. Pull r
 
 
 ### Using messages to check everything is working
-I use slackr to send me a message once a day that everything is ok. 
+I use [slackr](https://github.com/hrbrmstr/slackr) to send me a message each time it runs. This helps me ensure everything is ok. You can see how to do this [here](https://github.com/bestdan/dpegantwitlib/blob/master/inst/exdata/run_crontwit.R#L40). 
+
+EC2 instances sometimes die, so if you haven't heard from the machine in a while...
 
 ## Background
 I generally try to write ever-green/non-ephemeral [articles](http://www.dpegan.com/optimal_behavior/). I then periodically share random pieces of content on twitter, which helps people keep discovering relevant ideas. I appreciate it when other people do this, so I thought I would do it myself.
