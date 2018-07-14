@@ -111,7 +111,7 @@ if(!require(pacman)) install.packages("pacman", repos='http://cran.us.r-project.
 pacman::p_load(twitteR, yaml)
 library(crontwit)
 
-# Load paths. Don't use sudo for this, it messes up the ~/src/.
+# Load paths. If you're on EC2, be careful about using sudo to call this R file, it messes up the ~/src/.
 creds_path <- "~/src/twitter_credentials.yaml"
 twitter_creds <- yaml.load_file(creds_path)$twitter
 
@@ -142,7 +142,7 @@ As I noted earlier, wrapping your R code in a bash script can give more meaningf
 ```bash
 #!/bin/bash
 {
-    sudo Rscript src/dpegantwitlib/postRandomTweet_script.R
+    sudo Rscript src/dpegantwitlib/ 
 } >> src/myscellany/dpegantwitlib/log/bash_log.txt
 ```
 
