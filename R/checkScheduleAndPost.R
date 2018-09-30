@@ -18,10 +18,14 @@ checkScheduleAndPost <- function(schedule, tweet_db=NULL, minute_range = 3, now=
   if(nrow(matched_items) > 0){
     message(paste0("Posting ", nrow(matched_items), " tweets."))
     
+    
     results <- apply(matched_items, MARGIN = 1, 
                      FUN = getTweetMatch, 
                      tweet_db=tweet_db)
     
+    
+    
+    message("Something is wrong here. You need to deal better with 1 result vs more, and tweet_db isn't an argument to this function.")
     lapply(results, 
            postTweet, 
            tweet_db=tweet_db)
